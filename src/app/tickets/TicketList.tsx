@@ -1,21 +1,25 @@
-import React from 'react'
 import Link from 'next/link'
+import {db} from '../../../_data/db'
+import DeleteTicket from './delete';
 
 export const revalidate = 60 // revalidate the data at most every hour
 async function getTickets(){
     try{
         await new Promise(resolve => setTimeout(resolve, 4000))
-        const res = await fetch(`http://localhost:4000/tickets/`,{
-            next: {
-                revalidate: 0 // use 0 to opt out of using cache
-            }
-        })
-        const tickets = await res.json();
-        return tickets
+        // const res = await fetch(`http://localhost:4000/tickets/`,{
+        //     next: {
+        //         revalidate: 0 // use 0 to opt out of using cache
+        //     }
+        // })
+        // const tickets = await res.json();
+
+
+        return db
     }catch(error){
         return []
     }
 }
+
 
 async function TicketList() {
   const tickets = await getTickets()
@@ -39,6 +43,7 @@ async function TicketList() {
                     {ticket.priority} priority
                 </div>
             </Link>
+            <DeleteTicket id ={ticket.id}/>
         </div>
     ))
     }

@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Suspense } from "react";
 import Loading from "../../loading";
+import {db} from '../../../../_data/db'
 
 export async function generateStaticParams(){
   const res = await fetch('http://localhost:4000/tickets/');
@@ -12,16 +13,18 @@ export async function generateStaticParams(){
 async function getTicket(id){
   try{
     // await new Promise(resolve=>setTimeout(resolve,3000));
-    const res = await fetch(`http://localhost:4000/tickets/${id}`,{
-        next:{
-          revalidate:60
-        }
-      })
-      if(!res.ok){
-        notFound()
-      }
-      let body= await res.json()
-      return body
+    // const res = await fetch(`http://localhost:4000/tickets/${id}`,{
+    //     next:{
+    //       revalidate:60
+    //     }
+    //   })
+    //   if(!res.ok){
+    //     notFound()
+    //   }
+    //   let body= await res.json()
+
+
+      return db.find(elem =>elem['id']==id)
   }catch(error){
       notFound()
   }

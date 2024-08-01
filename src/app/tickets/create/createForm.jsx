@@ -1,5 +1,6 @@
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
+import {db} from '../../../../_data/db';
 
 export default function CreateForm(){
 
@@ -11,18 +12,24 @@ export default function CreateForm(){
       user_email: 'shashidonon@gmail.com',
       priority: formData.get('priority')
     };
-    const res = await fetch('http://localhost:4000/tickets/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(rawFormData),
-    })
+    db.push(rawFormData)
+    const random = Math.random()
+    redirect(`/tickets?${random}`)
 
-    if (res.status === 201) {
-      const random = Math.random()
-      redirect(`/tickets?${random}`)
-    }
+    // const res = await fetch('http://localhost:4000/tickets/', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify(rawFormData),
+    // })
+
+    // if (res.status === 201) {
+    //   const random = Math.random()
+    //   redirect(`/tickets?${random}`)
+    // }
+
+    
   }
   return (
     <main>
