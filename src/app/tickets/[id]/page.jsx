@@ -5,8 +5,9 @@ import Loading from "../../loading";
 import {db} from '../../../../_data/db'
 
 export async function generateStaticParams(){
-  const res = await fetch('http://localhost:4000/tickets/');
-  const tickets = await res.json()
+  // const res = await fetch('http://localhost:4000/tickets/');
+  // const tickets = await res.json()
+  const tickets = db;
   return tickets.map(ticket=>({ticket:ticket.id}))
 }
 
