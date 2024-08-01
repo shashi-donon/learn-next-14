@@ -1,4 +1,5 @@
 import { redirect } from 'next/navigation';
+import Link from 'next/link';
 
 export default function CreateForm(){
 
@@ -26,6 +27,9 @@ export default function CreateForm(){
   return (
     <main>
         <h2 className="text-primary text-center">Raise Ticket</h2>
+        <Link href="/tickets">
+          <button className='btn-primary'>Back</button>    
+        </Link>
         <form action={submitTicket} method="post">
           <label for="title">Title</label>
             <input id="title" type="text" name="title"/>
