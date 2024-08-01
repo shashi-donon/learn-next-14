@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "json-server -p 4000 --watch ./_data/db.json && next build",
-    "start": "json-server -p 4000 --watch ./_data/db.json && next start",
+    "build": "json-server -p 4000 ./_data/db.json && next build",
+    "start": "json-server -p 4000 ./_data/db.json && next start",
     "lint": "next lint"
   },
   "dependencies": {
